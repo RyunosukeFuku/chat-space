@@ -42,7 +42,7 @@
 ### Association
 - has_many :users, through: :members
 - has_many :members
-- has_many :message
+- has_many :messages
 
 
 
@@ -56,5 +56,5 @@
 |group_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :group
-- belongs_to :user
+- belongs_to :groups
+- belongs_to :users
