@@ -1,3 +1,6 @@
+#DB設計
+
+
 
 ## messageテーブル
 
@@ -25,6 +28,8 @@
 ### Association
 - has_many :group, through: :members
 - has_many :message
+
+
 
 ## groupテーブル
 
