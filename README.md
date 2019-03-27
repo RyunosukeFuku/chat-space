@@ -32,11 +32,11 @@
 
 
 
-## groupテーブル
+## groupsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|text|null: false|
+|name|text|null: false|
 
 
 ### Association
