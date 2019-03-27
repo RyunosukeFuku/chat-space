@@ -21,7 +21,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|user_name|text|null: false|
+|name|text|null: false,add_index, unique:true|
 |e_mail|text|null: false |
 |password|text|null :false|
 
