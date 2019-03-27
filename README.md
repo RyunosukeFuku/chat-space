@@ -26,8 +26,9 @@
 |password|text|null :false|
 
 ### Association
-- has_many :group, through: :members
-- has_many :message
+- has_many :groups, through: :members
+- has_many :members
+- has_many :messages
 
 
 
