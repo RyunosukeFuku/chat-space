@@ -5,9 +5,11 @@
         ユーザーネーム
       %ul.side-header__lists
         %li.list
-          = fa_icon 'edit', class: 'icon'
+          = link_to do
+            = fa_icon 'edit', class: 'icon'
         %li.list
-          = fa_icon 'cog', class: 'icon'
+          = link_to do
+            = fa_icon 'cog', class: 'icon'
     .groups
       .group
         .group-name
