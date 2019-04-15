@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
 
+
+  def index
+    @users = User.where('name LIKE(?)', "%#{params[:name]}%" ).where("id NOT IN (#{current_user.id})")
+    #name LIKE(?)で名前検索  #id NOT in current_user.idでログインしてないユーザーも全取得 
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end  
+  
   def edit
   end
 
