@@ -14,8 +14,8 @@ $(function(){
                     <div class = "message-upper__data">
                       ${message.date}
                     </div>
-                    </div>
-                    <div class = "message-">
+                  </div>
+                  <div class = "message-">
                     <div class = "message-lower__content"> 
                       ${message.content}
                     </div>
