@@ -1,7 +1,6 @@
 
 $(function ()
 {
-
   function buildHTML(message)
   {
     //functionによって関数を宣言,buildHTMLは関数の名前,(message)は引数
@@ -60,7 +59,6 @@ $(function ()
         $('.form__submit').prop('disabled', false);
         $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight }, 'fast');
         $('.new_message')[0].reset();
-
       })
 
       .fail(function ()
@@ -92,12 +90,10 @@ $(function ()
         });
         $('.messages').append(insertHTML);
         $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight }, 'fast');
-
       })
       .fail(function ()
       {
         alert('error');
-
       });
   }
   setInterval(reloadMessages, 5000);
