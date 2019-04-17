@@ -1,8 +1,9 @@
+
 $(function(){
 
   function buildHTML(message){
 //functionによって関数を宣言,buildHTMLは関数の名前,(message)は引数
-    var content = message.is_content_present ? `${message.content} ` : ''
+    
     var image = message.image == null ? "" : `<img src="${message.image}" class="lower-message__image">`
 
     var html = `<div class = "message" data-id=${message.id}>
@@ -13,14 +14,13 @@ $(function(){
                     <div class = "message-upper__data">
                       ${message.date}
                     </div>
-                  </div>
-                  <div class = "message-">
+                    </div>
+                    <div class = "message-">
                     <div class = "message-lower__content"> 
                       ${message.content}
                     </div>
                       ${image}
                   </div>
-                  
                 </div>`
     return html;
   }
@@ -32,7 +32,7 @@ $(function(){
 //非同期通信
   $('#new_message').on('submit', function(e){
 //submitイベントで発火させる    
-    e.preventDefault();
+    e.preventDefault(); //デフォルトで送信されるフォームの送信をキャンセル
     var formData = new FormData(this);
 //new fromDataでインスタンス作成    
 //引数thisはイベント発生したDOM要素#new_messageのフォーム情報取得   
@@ -41,12 +41,12 @@ $(function(){
     $.ajax({
 //フォーム送信押してajax通信
 //サーバーからデータ取得
-      url: url,
-      type: "POST",
-      data: formData,
-      dataType: 'json',
+      url: url, //リクエストのパス
+      type: "POST", //HTTPメソッド
+      data: formData, //リクエストと一緒に送るデータ
+      dataType: 'json', //json形式でデータ送る
       processData: false,
-      contentType: false
+      contentType: false, //リクエストに含まれるデータの型を変更しないための記述
     })
    
     .done(function(data){
@@ -55,14 +55,41 @@ $(function(){
       $('.messages').append(html);
       $('.form__submit').prop( 'disabled', false );
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
-      $('.form__message').reset();
-      $('.hidden').reset();
+      $('.new_message')[0].reset();
      
     })
 
     .fail(function(){
       alert('error');
-//通信エラーでfailが呼ばれアラート出る      
+           
     })
-  })
+  });
+
+  function reloadMessages() {
+    
+    var lastMessageId = $(".message:last-child").data("id")
+    console.log(lastMessageId);
+    $.ajax({
+      url: 'api/messages',
+      type: 'get',
+      dataType: 'json',
+      data: {id: lastMessageId},
+    })
+    .done(function(messages){
+      
+      var insertHTML = '';
+      messages.forEach(function(message){
+        var html = buildHTML(message);
+        insertHTML += html
+      });
+       $('.messages').append(insertHTML);
+       $('.messages').animate({scrollTop: $('.messages')[0]. scrollHeight}, 'fast');
+       
+    })
+    .fail(function() {
+      alert('error');
+       
+    });
+  }
+  setInterval(reloadMessages, 5000);
 });
