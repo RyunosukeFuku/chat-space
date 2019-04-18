@@ -72,7 +72,7 @@ $(function ()
   {
 
     var lastMessageId = $(".message:last-child").data("id")
-
+    var groupId = $('.message').last().attr("data-groupId");
     $.ajax({
       url: 'api/messages',
       type: 'get',
