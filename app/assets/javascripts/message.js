@@ -71,13 +71,19 @@ $(function ()
   function reloadMessages()
   {
 
-    var lastMessageId = $(".message:last-child").data("id")
-    var groupId = $('.message').last().attr("data-groupId");
+    if ($('.chat')[0]) //セレクタの先頭要素があれば
+    {
+      var lastMessageId = $(".message:last-child").data("id")
+    } else
+    {
+      return false;
+    };
     $.ajax({
-      url: 'api/messages',
+      url: ' api/messages',
       type: 'get',
       dataType: 'json',
       data: { id: lastMessageId },
+
     })
       .done(function (messages)
       {
@@ -91,10 +97,11 @@ $(function ()
         $('.messages').append(insertHTML);
         $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight }, 'fast');
       })
+
       .fail(function ()
       {
         alert('error');
       });
-  }
+  };
   setInterval(reloadMessages, 5000);
 });
